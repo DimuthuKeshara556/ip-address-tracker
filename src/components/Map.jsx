@@ -1,18 +1,24 @@
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import markerIcon from "../images/icon-location.svg"
-import { MapContainer, TileLayer } from "react-leaflet";
-const Map = (coordinates) => {
-    const marker = new L.icon({iconUrl:markerIcon});
-    let state ={
-        keyMap:Math.random(),
-    };
+import { MapContainer, TileLayer,Marker} from 'react-leaflet'
+import icon from "./icon"
+const Map = ({coordinates}) => {
+  let state = {
+    keyMAP: Math.random(),
+  };
   return (
-    <MapContainer 
-    key={state.keyMap}
-    center={[coordinates.lat,coordinates.lng]} className="w-full h-3/5 z-0">
-      <TileLayer attribution="Google Maps" url=""></TileLayer>
-    </MapContainer>
+    <MapContainer
+    key={state.keyMAP}
+     center={[coordinates.lat,coordinates.lng]}
+     zoom={18} 
+     scrollWheelZoom={true}
+        className="h-3/5 w-full z-0">
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker icon={icon} position={[coordinates.lat,coordinates.lng]}>
+        </Marker>
+      </MapContainer>
   )
 }
 
